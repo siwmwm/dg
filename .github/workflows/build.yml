@@ -1,0 +1,19 @@
+name: Build EXE
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: |
+          g++ main.cpp -o RyzenRAT.exe -lwininet -lws2_32 -static
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RyzenRAT
+          path: RyzenRAT.exe
